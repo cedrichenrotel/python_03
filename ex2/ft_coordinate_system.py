@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 13:26:09 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/02 20:41:24 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/02 21:02:13 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -23,10 +23,6 @@ def parsing(input_value: list[str]) -> list[int]:
     for i in range(1, len(input_value)):
         temp = input_value[i].split(',')
         for j in range(len(temp)):
-            try:
-                int(temp[j])
-            except ValueError:
-                raise ValueError(f"The argument {temp[j]} is not a value [KO]")
             num.append(int(temp[j]))
     if len(num) < 3:
         raise ValueError(f"insufficient number of arguments: {len(num)} "
@@ -48,8 +44,8 @@ def ft_coordinate_system(input_value: list[str]) -> None:
     try:
         num = parsing(input_value)
     except ValueError as e:
-        print(f"Error parsing coordinate: {e}")
-        return
+        print(f"Error parsing coordinates: {e}")
+        raise ValueError(f"ValueError, Args: (\"{e}\")")
 
     p1 = (num[0], num[1], num[2])
     p2 = (0, 0, 0)
