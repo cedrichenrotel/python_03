@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 13:26:09 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/02 20:37:03 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/02 20:41:24 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -58,6 +58,9 @@ def ft_coordinate_system(input_value: list[str]) -> None:
     print("=== Game Coordinate System ===")
     print(f"Position created: {p1}")
     print(f"Distance between {p1} and {p2}: {coordinate:.2f}")
+    print("\nUnpacking demonstration:")
+    print(f"Player at x={p1[0]}, y={p1[1]}, z={p1[2]}")
+    print(f"Coordinates: X={p1[0]}, Y={p1[1]}, Z={p1[2]}")
 
 
 def main():
