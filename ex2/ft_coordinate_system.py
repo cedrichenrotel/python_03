@@ -5,15 +5,35 @@
 #                                                      :::      ::::::::    #
 #  ft_coordinate_system.py                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 13:26:09 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/02 15:19:42 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/02 19:20:50 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 import math
 import sys
+
+
+def parsing(input_value: list[str]) -> list[int]:
+    num = []
+    if len(input_value) < 2:
+        raise ValueError("no argument [KO]")
+    for i in range(1, len(input_value)):
+        temp = input_value[i].split(',')
+        for j in range(len(temp)):
+            try:
+                int(temp[j])
+            except ValueError:
+                raise ValueError(f"The argument {temp[j]} is not a value [KO]")
+            num.append(int(temp[j]))
+    if len(num) < 6:
+        raise ValueError(f"insufficient number of arguments: {len(num)} "
+                         "[KO]")
+    elif len(num) > 6:
+        raise ValueError(f"limit of argument to exceed: {len(num)} [KO]")
+    return num
 
 
 def distance_formula(p1: tuple, p2: tuple) -> float:
@@ -25,25 +45,26 @@ def distance_formula(p1: tuple, p2: tuple) -> float:
 
 
 def ft_coordinate_system(input_value: list[str]) -> None:
-    if len(input_value) != 7:
-        raise ValueError("incorrect number of values")
-    num = []
-    for i in range(1, len(input_value)):
-        try:
-            int(input_value[i])
-        except ValueError:
-            raise ValueError(f"Parsing invalid coordinates:{input_value}")
-        float(num.append(input_value[i]))
+    try:
+        num = parsing(input_value)
+    except ValueError as e:
+        print(f"Error parsing coordinate: {e}")
+        return
 
-        p1 = (num[0], num[1], num[2])
-        p2 = (num[3], num[4], num[5])
-        return p1, p2
+    p1 = (num[0], num[1], num[2])
+    p2 = (num[3], num[4], num[5])
+    coordinate = distance_formula(p1, p2)
+
+    print("=== Game Coordinate System ===")
+    print(f"Position created: {p1} and {p2}")
+    print(f"Distance between {p1} and {p2}: {coordinate:.2f}")
+
 
 def main():
     try:
-       ft_coordinate_system(sys.argv)
+        ft_coordinate_system(sys.argv)
     except ValueError as e:
-        print(f"rror details - Type: {e}")
+        print(f"Error details - Type: {e}")
 
 
 if __name__ == "__main__":
