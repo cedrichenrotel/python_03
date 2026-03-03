@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_coordinate_system.py                           :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 13:26:09 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/02 21:02:13 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/03 07:28:26 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -51,7 +51,6 @@ def ft_coordinate_system(input_value: list[str]) -> None:
     p2 = (0, 0, 0)
     coordinate = distance_formula(p1, p2)
 
-    print("=== Game Coordinate System ===")
     print(f"Position created: {p1}")
     print(f"Distance between {p1} and {p2}: {coordinate:.2f}")
     print("\nUnpacking demonstration:")
@@ -60,6 +59,7 @@ def ft_coordinate_system(input_value: list[str]) -> None:
 
 
 def main():
+    print("=== Game Coordinate System ===")
     try:
         ft_coordinate_system(sys.argv)
     except ValueError as e:
