@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 18:09:10 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/04 17:34:43 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/04 19:02:23 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -30,9 +30,12 @@ def inventary(list_inv: dict) -> None:
 
 def current_inventory(list_inv: dict) -> None:
     total = total_item(list_inv)
-    for item in list_inv:
-        percentage = (list_inv[item] / total) * 100
-        print(f"{item}: {list_inv[item]} units ({percentage:.1f}%)")
+    for item, val in list_inv.items():
+        unit = "units"
+        if val == 1:
+            unit = "unit"
+        percentage = (val / total) * 100
+        print(f"{item}: {val} {unit} ({percentage:.1f}%)")
 
 
 def stock_input(list_inpute: list) -> dict:
@@ -90,9 +93,14 @@ def management_suggestions(list_inv: dict) -> None:
     print(f"Restock needed: {', '.join(restock)}")
 
 
-def Dictionary_properties_demo(list_inv: dict) -> None:
+def Dictionary_properties_demo(list_inv: dict, item: str) -> None:
     print(f"Dictionary keys: {', '.join(list_inv)}")
-    print(f"Dictionary value: {list_inv.values()}")
+    print(f"Dictionary value: {', '.join(map(str, list_inv.values()))}")
+
+    if list_inv.get(item):
+        print(f"Sample lookup - {item} in nventory: True")
+    else:
+        print(f"Sample lookup - {item} in nventory: False")
 
 
 def main():
@@ -124,7 +132,7 @@ def main():
     print("\n=== Management Suggestions ===")
     management_suggestions(list_items)
     print("\n=== Dictionary Properties Demo ===")
-    Dictionary_properties_demo(list_items)
+    Dictionary_properties_demo(list_items, 'sword')
 
 
 if __name__ == "__main__":
