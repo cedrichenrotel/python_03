@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 13:26:09 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/03 07:28:26 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/04 11:30:35 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -51,11 +51,12 @@ def ft_coordinate_system(input_value: list[str]) -> None:
     p2 = (0, 0, 0)
     coordinate = distance_formula(p1, p2)
 
+    x, y, z = p1
     print(f"Position created: {p1}")
     print(f"Distance between {p1} and {p2}: {coordinate:.2f}")
     print("\nUnpacking demonstration:")
-    print(f"Player at x={p1[0]}, y={p1[1]}, z={p1[2]}")
-    print(f"Coordinates: X={p1[0]}, Y={p1[1]}, Z={p1[2]}")
+    print(f"Player at x={x}, y={y}, z={z}")
+    print(f"Coordinates: X={x}, Y={y}, Z={z}")
 
 
 def main():
