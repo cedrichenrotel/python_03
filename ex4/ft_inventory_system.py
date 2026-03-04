@@ -5,10 +5,10 @@
 #                                                      :::      ::::::::    #
 #  ft_inventory_system.py                            :+:      :+:    :+:    #
 #                                                  +:+ +:+         +:+      #
-#  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
+#  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 18:09:10 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/04 15:01:15 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/04 17:34:43 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -67,7 +67,7 @@ def inventory_statistics(list_inv: dict) -> tuple:
             least_val = val
             least_key = key
 
-    return (most_val, most_key), (least_val, least_key)
+    return (most_key, most_val), (least_key, least_val)
 
 
 def item_categories(list_inv: dict) -> tuple:
@@ -88,6 +88,11 @@ def management_suggestions(list_inv: dict) -> None:
         if value < 2:
             restock.append(key)
     print(f"Restock needed: {', '.join(restock)}")
+
+
+def Dictionary_properties_demo(list_inv: dict) -> None:
+    print(f"Dictionary keys: {', '.join(list_inv)}")
+    print(f"Dictionary value: {list_inv.values()}")
 
 
 def main():
@@ -111,7 +116,7 @@ def main():
     print("\n=== Current Inventory ===")
     current_inventory(list_items)
     print("\n=== Inventory Statistics ===")
-    print(f"Most abundant:{most[0]} ({most[1]} units)")
+    print(f"Most abundant: {most[0]} ({most[1]} units)")
     print(f"Least abundant: {least[0]} ({least[1]} unit)")
     print("\n=== Item Categories ===")
     print(f"Moderate: {mode}")
@@ -119,6 +124,7 @@ def main():
     print("\n=== Management Suggestions ===")
     management_suggestions(list_items)
     print("\n=== Dictionary Properties Demo ===")
+    Dictionary_properties_demo(list_items)
 
 
 if __name__ == "__main__":
