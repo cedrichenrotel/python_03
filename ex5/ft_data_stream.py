@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 07:13:26 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/05 11:54:33 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/05 14:20:14 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -53,6 +53,27 @@ def print_generator(player: list, level: list, action: list) -> Generator:
     print("Memory usage: Constant (streaming)")
 
 
+def generator_demonstration() -> None:
+    n = 10
+    a, b = 0, 1
+    fibonacci = []
+
+    for _ in range(n):
+        fibonacci.append(str(a))
+        a, b = b, a + b
+    print(f"Fibonacci sequence (first 10): {', '.join(fibonacci)}")
+
+    prime = []
+
+    for i in range(2, 100):
+        for j in range(2, i):
+            if i % j == 0:
+                break
+        else:
+            prime.append(str(i))
+    print(f"Prime numbers (first {5}): {', '.join(prime[:5])}")
+
+
 def main():
     player = ["alice", "bob", "charlie"]
     level = range(20)
@@ -69,6 +90,8 @@ def main():
     print_generator(player, level, action)
     end = time.time()
     print(f"Processing time: {end - start:.3f} seconds")
+    print("\n=== Generator Demonstration ===")
+    generator_demonstration()
 
 
 if __name__ == "__main__":
