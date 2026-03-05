@@ -8,28 +8,49 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 07:13:26 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/05 09:50:33 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/05 11:54:33 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
+import time
 from random import choice
 from typing import Generator
 
 
-def game_data_stream(player: list, level: list, action: list) -> Generator:
+def generator_data(player: list, level: list, action: list) -> Generator:
 
-    for i in range(1000):
-        if i < 3:
-            event = {"player": choice(player), "level": choice(level),
-                     "action": choice(action)}
-            yield (f"Event{i}: {event['player']} ({event['level']})"
-                   f" {event['action']}")
+    for _ in range(1000):
+        event = {"player": choice(player), "level": choice(level),
+                 "action": choice(action)}
+        yield event
 
 
-def print_generator(player: list, level: list, action: list) -> None:
-    flux = (game_data_stream(player, level, action))
+def print_generator(player: list, level: list, action: list) -> Generator:
+    total = 0
+    high_level = 0
+    treasure = 0
+    Level_up = 0
+
+    flux = (generator_data(player, level, action))
     for event in flux:
-        print(event)
+        if total < 3:
+            print(f"Event {total + 1}: {event['player']} "
+                  f"(level {event['level']}) {event['action']}")
+        if event["level"] >= 10:
+            high_level += 1
+        if event["action"] == "found treasure":
+            treasure += 1
+        if event["action"] == "leveled up":
+            Level_up += 1
+        total += 1
+
+    print("\n=== Stream Analytics ===")
+    print(f"Total events processed: {total}")
+    print(f"high_level players (10+): {high_level}")
+    print(f"Treasure events: {treasure}")
+    print(f"Level-up events: {Level_up}")
+    print()
+    print("Memory usage: Constant (streaming)")
 
 
 def main():
@@ -44,7 +65,10 @@ def main():
     print("=== Game Data Stream Processor ===")
     print("\nProcessing 1000 game events...")
     print()
+    start = time.time()
     print_generator(player, level, action)
+    end = time.time()
+    print(f"Processing time: {end - start:.3f} seconds")
 
 
 if __name__ == "__main__":
