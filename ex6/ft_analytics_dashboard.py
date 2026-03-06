@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 14:22:31 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/06 16:35:38 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/06 20:52:56 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -38,14 +38,19 @@ def Dict_Comprehension_Examples(player: list, lst_achivement: dict) -> None:
         for cat in ['high', 'medium', 'low']
     }
 
-    Achievement = {ach for player in lst_achivement
-                   for ach in lst_achivement[player]}
-
-    regions = {p['region'] for p in player}
-
     print(f"Player scores: {Player_scores}")
     print(f"Score categories: {categories}")
-    print(f"Unique achievements: {Achievement}")
+
+
+def Set_Comprehension_Examples(player: list, lst_achivement: dict) -> None:
+
+    Achievement = set(ach for player in lst_achivement
+                      for ach in lst_achivement[player])
+
+    regions = set(p['region'] for p in player)
+
+    # print(f"Unique players: {lst_Player_score}")
+    print(f"Unique achievement: {Achievement}")
     print(f"Active regions: {regions}")
 
 
@@ -56,18 +61,22 @@ def Combined_Analysis(player: list, lst_achivement: dict) -> None:
 
     Average_score = (sum(p['score'] for p in player) / len(player))
 
+    s_max = (max(player, key=lambda x: x['score']))
+    name, score = s_max['name'], s_max['score']
+    nb_ach = len(lst_achivement.get(s_max['name'], []))
+
     print(f"Total players: {len(player)}")
     print(f"Total unique achievements: {achivement}")
     print(f"Average score: {Average_score}")
-    print(f"Top performer: ")
+    print(f"Top performer: {name} ({score} points, {nb_ach} achievements)")
 
 
 def main():
     list_player = [
-       {'name': 'alice',   'score': 2300, 'region': 'north', 'active': True},
-       {'name': 'bob',     'score': 1800, 'region': 'east', 'active': True},
-       {'name': 'charlie', 'score': 2150, 'region': 'central', 'active': True},
-       {'name': 'diana',   'score': 2050, 'region': 'north', 'active': False}
+       {'name': 'Alice',   'score': 2300, 'region': 'north', 'active': True},
+       {'name': 'Bob',     'score': 1800, 'region': 'east', 'active': True},
+       {'name': 'Charlie', 'score': 2150, 'region': 'central', 'active': True},
+       {'name': 'Diana',   'score': 2050, 'region': 'north', 'active': False}
     ]
 
     list_achivement = {
@@ -92,6 +101,8 @@ def main():
     List_Comprehension_Examples(list_player)
     print("\n=== Dict Comprehension Examples ===")
     Dict_Comprehension_Examples(list_player, list_achivement)
+    print("\n=== Set Comprehension Examples ===")
+    Set_Comprehension_Examples(list_player, list_achivement)
     print("\n=== Combined Analysis ===")
     Combined_Analysis(list_player, list_achivement)
 
