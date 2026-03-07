@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42lyon.fr>     +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 14:22:31 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/06 20:52:56 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/07 11:19:42 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -38,32 +38,37 @@ def Dict_Comprehension_Examples(player: list, lst_achivement: dict) -> None:
         for cat in ['high', 'medium', 'low']
     }
 
+    Achievement_counts = {p: len(n_ach) for p, n_ach in lst_achivement.items()}
+
     print(f"Player scores: {Player_scores}")
     print(f"Score categories: {categories}")
+    print(f"Achievement counts: {Achievement_counts}")
 
 
 def Set_Comprehension_Examples(player: list, lst_achivement: dict) -> None:
+
+    Unique_players = set(p["name"] for p in player)
 
     Achievement = set(ach for player in lst_achivement
                       for ach in lst_achivement[player])
 
     regions = set(p['region'] for p in player)
 
-    # print(f"Unique players: {lst_Player_score}")
+    print(f"Unique players: {Unique_players}")
     print(f"Unique achievement: {Achievement}")
     print(f"Active regions: {regions}")
 
 
 def Combined_Analysis(player: list, lst_achivement: dict) -> None:
 
-    achivement = len(set((ach for player in lst_achivement
-                     for ach in lst_achivement[player])))
+    achivement = len({ach for player in lst_achivement
+                     for ach in lst_achivement[player]})
 
     Average_score = (sum(p['score'] for p in player) / len(player))
 
-    s_max = (max(player, key=lambda x: x['score']))
-    name, score = s_max['name'], s_max['score']
-    nb_ach = len(lst_achivement.get(s_max['name'], []))
+    player_sc = [(p['score'], p['name']) for p in player]
+    score, name = sorted(player_sc, reverse=True)[0]
+    nb_ach = len(lst_achivement.get(name, []))
 
     print(f"Total players: {len(player)}")
     print(f"Total unique achievements: {achivement}")
