@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 07:13:26 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/05 14:20:14 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/09 09:36:47 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -53,25 +53,22 @@ def print_generator(player: list, level: list, action: list) -> Generator:
     print("Memory usage: Constant (streaming)")
 
 
-def generator_demonstration() -> None:
-    n = 10
+def fibonacci(n: int) -> Generator:
+
     a, b = 0, 1
-    fibonacci = []
 
     for _ in range(n):
-        fibonacci.append(str(a))
+        yield a
         a, b = b, a + b
-    print(f"Fibonacci sequence (first 10): {', '.join(fibonacci)}")
 
-    prime = []
 
-    for i in range(2, 100):
+def prime_number(n: int) -> Generator:
+    for i in range(2, 12):
         for j in range(2, i):
             if i % j == 0:
                 break
         else:
-            prime.append(str(i))
-    print(f"Prime numbers (first {5}): {', '.join(prime[:5])}")
+            yield i
 
 
 def main():
@@ -91,7 +88,11 @@ def main():
     end = time.time()
     print(f"Processing time: {end - start:.3f} seconds")
     print("\n=== Generator Demonstration ===")
-    generator_demonstration()
+    fibonacci(10)
+    print("Fibonacci sequence (first 10): "
+          f"{', '.join(map(str, fibonacci(10)))}")
+    prime_number(5)
+    print(f"Prime numbers (first 5): {', '.join(map(str, prime_number(5)))}")
 
 
 if __name__ == "__main__":
