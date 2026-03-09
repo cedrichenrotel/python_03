@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 13:26:09 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/04 11:30:35 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/09 08:11:53 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -45,7 +45,7 @@ def ft_coordinate_system(input_value: list[str]) -> None:
         num = parsing(input_value)
     except ValueError as e:
         print(f"Error parsing coordinates: {e}")
-        raise ValueError(f"ValueError, Args: (\"{e}\")")
+    raise ValueError(f"ValueError, Args: (\"{e}\")")
 
     p1 = (num[0], num[1], num[2])
     p2 = (0, 0, 0)

@@ -8,7 +8,7 @@
 #  By: cehenrot <cehenrot@student.42.fr>         +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/02 10:23:07 by cehenrot        #+#    #+#               #
-#  Updated: 2026/03/02 13:24:01 by cehenrot        ###   ########.fr        #
+#  Updated: 2026/03/09 07:51:41 by cehenrot        ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -25,41 +25,25 @@ def ft_score_analytics(argvs: list[str]) -> None:
 
     for i in range(1, len(argvs)):
         try:
-            int(argvs[i])
+            count = int(argvs[i])
         except ValueError:
             raise ValueError("The input is not a value")
-        scores_processed.append(argvs[i])
-        total_score += int(argvs[i])
+        scores_processed.append(int(argvs[i]))
+        total_score += count
 
-    total_player = i
+    total_player = len(scores_processed)
     average_score = total_score / total_player
-    low_score = min_value(scores_processed)
-    hight_score = max_value(scores_processed)
+    low_score = min(scores_processed)
+    hight_score = max(scores_processed)
     score_range = hight_score - low_score
 
     print(f"Scores_processed: {scores_processed}")
     print(f"Total players: {total_player}")
     print(f"Total score: {total_score}")
     print(f"Average score: {average_score:.1f}")
-    print(f"High score: {hight_score}")
+    print(f"Hight score: {hight_score}")
     print(f"Low score: {low_score}")
     print(f"Score range: {score_range}")
-
-
-def min_value(tab_val: list[int]) -> int:
-    nb_min = int(tab_val[1])
-    for i in range(len(tab_val)):
-        if int(tab_val[i]) < nb_min:
-            nb_min = int(tab_val[i])
-    return nb_min
-
-
-def max_value(tab_val: list[int]) -> int:
-    nb_max = int(tab_val[1])
-    for i in range(len(tab_val)):
-        if int(tab_val[i]) > nb_max:
-            nb_max = int(tab_val[i])
-    return nb_max
 
 
 def main():
